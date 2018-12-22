@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                       xmlns:tools="http://schemas.android.com/tools"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="wrap_content"
+                                       android:background="@color/white">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  tools:context=".MainActivity">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_alignParentTop="true">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Volume Media Control"
+                    android:layout_marginLeft="16dp"
+                    android:id="@+id/toolbar_title"
+                    android:layout_gravity="center"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"/>
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="16dp">
+
+            <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    style="@style/TextAppearance.MaterialComponents.Body1"/>
+
+            <TextView
+                    android:id="@+id/tvStatusInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp">
+            <TextView
+                    android:id="@+id/tvSettings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Open Accessibility Settings"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccent"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_help_outline"
+                        android:id="@+id/ivHelp"
+                        android:layout_marginRight="16dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:text="Accessibility service is required to listen to volume controls and force it to use the media controls for certain apps. No other information is captured or transmitted anywhere. The source of this app is available on Github."
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+
+
+        </LinearLayout>
+
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#44000000"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"/>
+
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/progressBar"
+                    android:layout_gravity="center"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rvApps"/>
+        </FrameLayout>
+
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

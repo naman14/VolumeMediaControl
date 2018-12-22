@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Volume Media Control</string>
+    <string name="description">Volume Media Control allows you to use the media controls as default for certain apps. For example, when you are using Netflix, the volume control should  adjust media volume and not the ringer volume.\n\nAccessibility service is required to listen to volume controls and force it to use the media controls for certain apps. \n\nNo other information is captured or transmitted anywhere. \n\nThe source of this app is available on Github.</string>
+
+</resources>
