@@ -4,6 +4,7 @@ import android.accessibilityservice.AccessibilityService
 import android.view.accessibility.AccessibilityEvent
 import android.content.Context
 import android.media.AudioManager
+import android.os.Handler
 import android.preference.PreferenceManager
 
 class MediaVolumeService : AccessibilityService() {
@@ -39,34 +40,35 @@ class MediaVolumeService : AccessibilityService() {
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         if (event == null) return
 
-        if (enabledPackageList == null) {
-            enabledPackageList = getEnabledPackageList(this)
-        }
+        if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
 
-        if (event.packageName != "com.android.systemui") {
-            needForce = enabledPackageList!!.contains(event.packageName)
-        } else {
-            if (needForce) {
-                Utils.forceVolumeControlStream(this, AudioManager.STREAM_MUSIC)
-            } else {
-                Utils.forceVolumeControlStream(this, -1)
+            if (event.packageName == "com.android.systemui") {
+                Handler().postDelayed({ updateVolumeControlStream() }, 100)
+                return
             }
+
+            if (enabledPackageList == null) {
+                enabledPackageList = getEnabledPackageList(this)
+            }
+
+            needForce = enabledPackageList!!.contains(event.packageName)
+            updateVolumeControlStream()
         }
     }
 
+    private fun updateVolumeControlStream() {
+        if (needForce) {
+            Utils.forceVolumeControlStream(this, AudioManager.STREAM_MUSIC)
+        } else {
+            Utils.forceVolumeControlStream(this, -1)
+        }
+    }
 
     override fun onInterrupt() {
     }
 
     override fun onServiceConnected() {
         super.onServiceConnected()
-
-//        val info = AccessibilityServiceInfo()
-//        info.eventTypes = AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
-//        info.feedbackType = AccessibilityServiceInfo.FEEDBACK_GENERIC
-//        info.description = getString(R.string.description)
-//        serviceInfo = info
-
         enabledPackageList = getEnabledPackageList(this)
     }
 }
